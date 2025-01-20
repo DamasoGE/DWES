@@ -1,0 +1,13 @@
+Hacer un juego para 2 jugadores que funciona de la siguiente forma:
+
+Tenemos cartas (con numero y palo)
+
+Un usuario que ha iniciado sesión crea una partida nueva. 
+
+Se le dan a elegir entre 2 cartas aleatorias de todas las cartas disponibles. El usuario elige una de ellas. y la partida pasa a estar abierta, esperando un segundo jugador.
+
+Cuando un segundo usuario inicie sesión, podrá buscar partidas abiertas y jugar en ellas.
+
+Al seleccionar una partida abierta salen 2 cartas aleatorias entre todas las disponibles (excepto la jugada por el jugador 1). De esas 2 escoge una y la partida finaliza. El jugador que tenga una carta más alta gana.
+
+Cualquier usuario tendrá acceso a su histórico de partidas, pudiendo ver todas las partidas que ha jugado y si las ha ganado, perdido o empatado.

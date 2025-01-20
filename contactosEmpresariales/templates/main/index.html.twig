@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    I am {{ who }} !!
+
+
+
+    This friendly message is coming from:
+
+    <div>
+        <h1>Menu de Acceso</h1>
+        <div>
+        <ul>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li><a href='/user'>User</a></li>
+            {% endif %}
+            <li><a href='/company'>Company</a></li>
+            <li><a href='/contact'>Contact</a></li>
+            <li><a href='/record'>Record</a></li>
+        </ul>
+        </div>
+    </div>
+
+    <ul>
+        <li>Your controller at <code>C:/Users/coson/Documents/REPOSITORIOS_GITHUB/DWES/pruebaSymfony/src/Controller/MainController.php</code></li>
+        <li>Your template at <code>C:/Users/coson/Documents/REPOSITORIOS_GITHUB/DWES/pruebaSymfony/templates/main/index.html.twig</code></li>
+    </ul>
+</div>
+{% endblock %}

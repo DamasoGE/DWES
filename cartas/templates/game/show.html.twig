@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Game{% endblock %}
+
+{% block body %}
+    <h1>Game</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ game.id }}</td>
+            </tr>
+            <tr>
+                <th>User1</th>
+                <td>{{ game.user0.username }}</td>
+            </tr>
+            <tr>
+                <th>Card1:</th>
+                <td> {{ game.card0.number }} de {{ game.card0.suit}}</td>
+            </tr>
+            <tr>
+                <th>User2</th>
+                <td>{{ game.user1 ? game.user1.username : "Sin jugador" }}</td>
+            </tr>
+            <tr>
+                <th>Card2</th>
+                <td>{{ game.card1 ? game.card.number : "?" }} de {{ game.card1 ? game.card.suit : "?" }}</td>
+            </tr>
+            <tr>
+                <th>Finished</th>
+                <td>{{ game.finished ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_game_index') }}">back to list</a>
+
+    <a href="{{ path('app_game_edit', {'id': game.id}) }}">edit</a>
+
+    {{ include('game/_delete_form.html.twig') }}
+{% endblock %}

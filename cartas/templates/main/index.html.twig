@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello MainController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+
+    <h2>Juego de Carta más alta</h2>
+
+    <h3> <a href="/game/new"> Crear partida nueva </a></h3>
+    <h3> <a href="/game"> Unirse a una partida empezada </a></h3>
+    <h3> <a href="/game?finished=true"> Ver partidas jugadas </a></h3>
+
+
+</div>
+
+<script>
+    /*
+    document.addEventListener('click', function(event) {
+        event.preventDefault();
+        const element = event.target;
+        if(element.tagName=='BUTTON'){
+            if(parseInt(element.value) > {{machineCard.number}}){
+                alert("Has ganado")
+            }else{
+                alert("Has perdido")
+            }
+        }
+    });
+    */
+</script>
+
+{% endblock %}

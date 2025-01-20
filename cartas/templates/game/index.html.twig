@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Game index{% endblock %}
+
+{% block body %}
+    <h1>Partidas disponibles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User0</th>
+                <th>Card0</th>
+                <th>User1</th>
+                <th>Card1</th>
+                <th>Finished</th>
+                <th>actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr>
+                <td>{{ game.id }}</td>
+                <td>{{ game.user0.username }}</td>
+                <td>{{ game.card0.number}} de {{ game.card0.suit}}</td>   
+                <td>{{ game.user1 ? game.user1.username : "Sin jugador" }}</td>  
+                <td>{{ game.card1 ? game.card1.number : "?"}} de {{ game.card1 ? game.card1.suit : "?"}}</td>              
+                <td>{{ game.finished ? 'Yes' : 'No' }}</td>
+
+                <td>
+                    <a href="{{ path('app_game_play', {'idGame': game.id}) }}">jugar</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_game_new') }}">Create new</a>
+
+{% endblock %}

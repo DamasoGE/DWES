@@ -1,0 +1,35 @@
+Nos piden una aplicación para llevar el seguimiento de los contactos de una empresa.
+
+Para ello tendremos 2 tipos de usuarios, les empleados y los admin
+
+Los admin pueden cambiar el rol de los empleados a admin
+
+Los empleados pueden crear empresas, de las que queremos saber nombre, nif, dirección, telefono y correo electrónico. Cada empresa podrá tener varias personas de contacto, de las que queremo saber su nombre, puesto, telefono y correo electrónico.
+
+Los empleados podran editar y borrar tanto empresas como contactos. El borrado será lógico (no se borra de la base de datos, se marca para que no sea visible)
+
+Los empleados podrán añadir un registro de comunicación que ha realizado con un contacto de una empresa. De ese registro queremos saber cuando fue, con qué contacto de qué empresa y una anotación de esa llamada.
+
+---> hasta aquí un 5
+
+Cuando el empleado lo considere puede "cerrar" el registro de comunicación.
+
+Una vez que el registro esté cerrado, se podrá iniciar otro registro sin problema.
+
+---> hasta aquí un 6
+
+Cada empleado ve en su pagina principal los registros ABIERTOS. Aunque tiene un enlace para ver todos los registros en los que ha participado (abiertos y cerrados).
+
+---> hasta aquí un 7
+
+Habrá una vista con el listado de empresas. Al pinchar en una empresa, sale la información de esa empresa junto al listado de los contactos de esa empresa.
+
+---> hasta aquí un 8
+
+Tendremos un buscador de empresas en su vista de listado y un buscador en el listado de registros (que busque por empresa, contacto o incluso por el texto que tenga dentro de las anotaciones.
+
+---> hasta aqui un 9
+
+El administrador podrá ver un listado de todos los registros de comunicación, cerrar o reabrir un registro y borrar registros completos. En este caso el borrar es definitivo.
+
+---> hasta aquí un 10 

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Game{% endblock %}
+
+{% block body %}
+    <h2>Nueva Partida</h2>
+
+    <h3> Selecciona una carta</h3>
+
+    {% for card in gameCards %}
+        <a href='/game/new?card={{ card.id}}'> {{ card.number }} de {{ card.suit}} </a>
+        <br>
+    {% endfor %}
+
+    <br>
+    <a href="{{ path('app_game_index') }}">back to list</a>
+{% endblock %}
