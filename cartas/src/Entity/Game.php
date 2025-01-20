@@ -37,14 +37,14 @@ class Game
         return $this->id;
     }
 
-    public function isFinished(): ?bool
+    public function getWinner(): ?bool
     {
         return $this->winner;
     }
 
-    public function setFinished(bool $finished): static
+    public function setWinner(bool $winner): static
     {
-        $this->winner = $finished;
+        $this->winner = $winner;
 
         return $this;
     }
@@ -96,4 +96,5 @@ class Game
 
         return $this;
     }
+
 }

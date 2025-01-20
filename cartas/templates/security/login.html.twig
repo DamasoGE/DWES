@@ -8,10 +8,10 @@
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
+    <h1 class="h3 mb-3 font-weight-normal">Juego de la carta más alta: LOGIN</h1>
+    <label for="inputUsername">Usuario</label>
     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
+    <label for="inputPassword">Contraseña</label>
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
@@ -19,7 +19,10 @@
     >
 
     <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
+        Iniciar sesion
     </button>
 </form>
+
+<a href="{{ path('app_register') }}">Registrate</a>
+
 {% endblock %}

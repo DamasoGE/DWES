@@ -15,7 +15,7 @@ class GameType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('finished')
+            ->add('winner')
             ->add('user0', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'id',

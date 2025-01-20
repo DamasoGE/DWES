@@ -8,8 +8,11 @@
     <h3> Selecciona una carta</h3>
 
     {% for card in gameCards %}
-        <a href='/game/play/{{game.id}}/{{ card.id}}'> {{ card.number }} de {{ card.suit}} </a>
-        <br>
+    <form action="/game/{{ game.id }}" method="post">
+        <input type="hidden" name="card" value="{{ card.id }}">
+        <button type="submit">{{ card.number }} de {{ card.suit }}</button>
+    </form>
+    <br>
     {% endfor %}
 
     <br>
