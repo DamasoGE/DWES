@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StockChange{% endblock %}
+
+{% block body %}
+    <h1>StockChange</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ stock_change.id }}</td>
+            </tr>
+            <tr>
+                <th>StockChange</th>
+                <td>{{ stock_change.stockChange }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ stock_change.date ? stock_change.date|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stockchange_index') }}">back to list</a>
+
+    {{ include('stock_change/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestor de Inventario{% endblock %}
+
+{% block body %}
+
+
+    {% if info is defined %}
+        <h3> {{ info }} </h3>
+    {% endif %}
+
+    <h1>Gestor de Inventario</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>ItemID</th>
+                <th>Item</th>
+                <th>StockChange</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stock_change in stock_changes %}
+            <tr>
+                <td>{{ stock_change.id }}</td>
+                <td>{{ stock_change.item.id }}</td>
+                <td>{{ stock_change.item.description }}</td>
+                <td>{{ stock_change.stockChange }}</td>
+                <td>{{ stock_change.date ? stock_change.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_stockchange_show', {'id': stock_change.id}) }}">show</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_stockchange_new') }}">Create new</a>
+{% endblock %}

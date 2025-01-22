@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestor de Artículos{% endblock %}
+
+{% block body %}
+
+    <h1>Gestor de artículos (ADMIN)</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Hallway</th>
+                <th>Rack</th>
+                <th>Self</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.description }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.location.hallway }}</td>
+                <td>{{ item.location.rack }}</td>
+                <td>{{ item.location.shelf }}</td>
+                <td>
+                    <a href="{{ path('app_item_show', {'id': item.id}) }}">show</a>
+                    <a href="{{ path('app_item_edit', {'id': item.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_item_new') }}">Create new</a>
+{% endblock %}
