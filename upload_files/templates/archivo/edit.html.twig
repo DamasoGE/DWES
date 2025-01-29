@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Archivo{% endblock %}
+
+{% block body %}
+    <h1>Edit Archivo</h1>
+
+    {{ include('archivo/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_archivo_index') }}">back to list</a>
+
+    {{ include('archivo/_delete_form.html.twig') }}
+{% endblock %}

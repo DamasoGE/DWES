@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Archivo index{% endblock %}
+
+{% block body %}
+    <h1>Archivo index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Extension</th>
+                <th>Filename</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for archivo in archivos %}
+            <tr>
+                <td>{{ archivo.id }}</td>
+                <td>{{ archivo.name }}</td>
+                <td>{{ archivo.extension }}</td>
+                <td>{{ archivo.filename }}</td>
+                <td>
+                    <a href="{{ path('app_archivo_show', {'id': archivo.id}) }}">show</a>
+                    <a href="{{ path('app_archivo_edit', {'id': archivo.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_archivo_new') }}">Create new</a>
+{% endblock %}

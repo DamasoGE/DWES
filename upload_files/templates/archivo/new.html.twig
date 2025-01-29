@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Archivo{% endblock %}
+
+{% block body %}
+    <h1>Create new Archivo</h1>
+
+    {{ include('archivo/_form.html.twig') }}
+
+    <a href="{{ path('app_archivo_index') }}">back to list</a>
+{% endblock %}
