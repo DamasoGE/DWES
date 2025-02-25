@@ -3,29 +3,80 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post">
+
+<style>
+    .login-container {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+    .login-container h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .form-control {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .btn-primary {
+        width: 85%;
+        background: red;
+        border: none;
+        color: white;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+    .btn-primary:hover {
+        background: darkred;
+    }
+    .alert-danger {
+        color: white;
+        background: red;
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    .link-back{
+        margin: 10px;
+        padding: 10px;
+        color: gray;
+        margin-top: 30px;
+    }
+    .link-back:hover{
+        color: red;
+    }
+</style>
+
+<div class="login-container">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Has iniciado sesión como: {{ app.user.userIdentifier }}
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
+    <h1>Iniciar Sesión:</h1>
+    <form method="post">
+        <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" placeholder="Username" autocomplete="username" required autofocus>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" autocomplete="current-password" required>
+        
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>
+    <br><br>
+    <a class="link-back" href="{{ path('app_register') }}"> ¡Registrate!</a>
+</div>
 {% endblock %}
