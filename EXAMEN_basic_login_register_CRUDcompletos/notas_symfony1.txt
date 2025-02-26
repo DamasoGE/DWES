@@ -1,0 +1,36 @@
+Crear el proyecto: symfony new nombre-proyecto
+
+Si tenemos el proyecto se actualiza como: composer update (igual que el npm install)
+
+PAQUETES IMPORTANTES (Si hace falta instalar alguno sobre la marcha: composer require "paquete"):
+---------------------
+Object Relational Mapping, sirve para todo lo demás: composer-require orm
+Para poder crear entidades(clases): composer require symfony/maker-bundle --dev
+Para poder crear usuarios (clases especial): composer require symfony/security-bundle
+Twig (para crear los controladores correlacionados con vistas): composer require twig
+Para crear el formulario de registro: composer require form validator
+
+BASE DE DATOS (CADA VEZ QUE SE QUIERA INSERTAR ALGO EN LA BD SE DEBE HACER UN MIGRATION Y SU CONFIRMACION)
+-------------
+Conectar con base de datos (archivo .env) Debe estar funcionando mysql (puedes usar el de xamp):
+DATABASE_URL="mysql://root:@127.0.0.1:3306/pruebasymfony"
+
+Crear la base de datos: php bin/console doctrine:database:create
+Migración para llevar la estructura a la base de datos: php bin/console make:migration
+Preparamos la migración a la BD: php bin/console doctrine:migrations:migrate
+Confimamos la migración a la BD y crea todas las tablas:php bin/console doctrine:schema:update --complete --force 
+
+
+Si da error de paquete en instalaciones hay que cambiar el php.ini y quitar el ";" del paquete que necesites (el paquete zip: extension=zip)
+
+CREAR ELEMENTOS PARA EL PROYECTO:
+--------------------------------
+Crear entidades (clases): php bin/console make:entity
+Crear el crud para la base de datos: php bin/console make:crud
+Para crear el usuario especial de login: php bin/console make:user
+Para crear los controladores (antes instalado twig): php bin/console make:controller
+Para crear el login: php bin/console make:auth
+Para crear el formulario de registro: php bin/console make:registration-form
+
+Activar el servidor: symfony server:start
+Otra forma: symfony serve

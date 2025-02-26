@@ -1,0 +1,105 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block body %}
+
+<style>
+/* Contenedor para la tabla */
+.user-table-container {
+    padding: 20px;
+    max-width: 90%;
+    overflow-x: auto;
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Estilo general de la tabla */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Encabezado de la tabla */
+.user-table thead {
+    background-color: #f2f2f2;
+}
+
+.user-table th {
+    padding: 12px;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Estilo de las celdas */
+.user-table td {
+    padding: 12px;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Fila alternada con un fondo más claro */
+.user-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Acción de edición */
+.action-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Hover en el botón de editar */
+.action-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Mensaje cuando no hay registros */
+.user-table td[colspan="4"] {
+    text-align: center;
+    font-size: 16px;
+    color: #888;
+    padding: 20px;
+}
+
+</style>
+    <h1>User Index</h1>
+
+    <div class="user-table-container">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="action-btn edit-btn">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

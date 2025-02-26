@@ -1,0 +1,216 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ticket{% endblock %}
+
+{% block body %}
+    <div class="ticket-info">
+        <h2>Ticket Information</h2>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ ticket.id }}</td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ ticket.title }}</td>
+                </tr>
+                <tr>
+                    <th>Text</th>
+                    <td>{{ ticket.text }}</td>
+                </tr>
+                <tr>
+                    <th>Status</th>
+                    <td>
+                        {% if ticket.status == 0 %}
+                            Nuevo
+                        {% elseif ticket.status == 1 %}
+                            Abierto
+                        {% elseif ticket.status == 2 %}
+                            Cerrado
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>CreatedAt</th>
+                    <td>{{ ticket.createdAt ? ticket.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>ClosedAt</th>
+                    <td>{{ ticket.closedAt ? ticket.closedAt|date('Y-m-d H:i:s') : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Rating</th>
+                    <td>{{ ticket.rating }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="ticket-answers">
+        <h2>Conversación</h2>
+        {% if answers is not empty %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Text</th>
+                        <th>CreatedAt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for answer in answers %}
+                        <tr>
+                            <td>{{ answer.user.username }}</td>
+                            <td>{{ answer.text }}</td>
+                            <td>{{ answer.createdAt ? answer.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">No answers yet.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No hay respuestas aún</p>
+        {% endif %}
+    </div>
+
+
+    <div class="ticket-create-answer">
+    
+        <h2>Crear Respuesta</h2>
+        {% if ticket.status != 2 %}
+            {% if 'ROLE_EMPLOYEE' in app.user.roles or answers|length > 0 %}
+                <form method="POST" action="{{ path('app_answer_new', {'id': ticket.id}) }}">
+                    <textarea name="text" rows="4" class="form-control" placeholder="Escribe tu respuesta..."></textarea>
+                    <button type="submit" class="btn btn-primary">Enviar Respuesta</button>
+                </form>
+                {% if 'ROLE_EMPLOYEE' in app.user.roles %}
+                    <form method="POST" action="{{ path('app_ticket_close', {'id': ticket.id}) }}">
+                        <button type="submit" id="ticket-close-button">Cerrar Ticket</button>
+                    </form>
+                {% endif %}
+                <br>
+                <a href="{{ path('app_ticket_index') }}" class="btn btn-link">Volver</a>
+            {% else %}
+                <p>Debes esperar la respuesta de un técnico</p>
+            {% endif %}
+        {% else %}
+            <p> Este tema no admite más respuestas </p>
+            {% if ticket.rating is null and 'ROLE_CLIENT' in app.user.roles %}
+            <h3> Deja tu valoración </h3>
+            <form method="POST" action="{{ path('app_ticket_rating', {'id': ticket.id}) }}">
+                <label for="rating">Calificación:</label>
+                <input type="number" id="rating" name="rating" min="0" max="5" step="1" placeholder="Introduce una calificación (0-5)" required>
+                <button type="submit" class="btn btn-primary">Enviar Valoracion</button>
+            </form>
+            {% endif %}
+        {% endif %}
+    </div>
+
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .ticket-info{
+            margin-top: 15px;
+        }
+        .ticket-info, .ticket-answers, .ticket-create-answer, .ticket-actions {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .ticket-info h2, .ticket-answers h2, .ticket-create-answer h2, .ticket-actions h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+        }
+
+        .ticket-create-answer textarea {
+            width: 90%;
+            padding: 12px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .ticket-create-answer textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        .ticket-create-answer button {
+            width: 95%;
+            background: #007bff;
+            border: none;
+            color: white;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .ticket-create-answer button:hover {
+            background-color: #0056b3;
+        }
+
+        .ticket-create-answer a {
+            margin-right: 10px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .ticket-create-answer .btn-link {
+            color: #007bff;
+        }
+
+        .ticket-create-answer .btn-link:hover {
+            text-decoration: underline;
+        }
+        #ticket-close-button {
+            background-color: #dc3545; /* Rojo para indicar una acción de cierre */
+            color: white; /* Texto blanco */
+            border: none; /* Sin borde */
+            padding: 10px 20px; /* Espaciado dentro del botón */
+            font-size: 16px; /* Tamaño de fuente */
+            border-radius: 5px; /* Bordes redondeados */
+            cursor: pointer; /* Cursor de mano */
+            transition: background-color 0.3s ease; /* Transición suave en el hover */
+        }
+
+        #ticket-close-button:hover {
+            background-color: #c82333; /* Rojo más oscuro cuando el cursor pasa por encima */
+        }
+
+        #ticket-close-button:focus {
+            outline: none; /* Eliminar el borde al enfocar el botón */
+        }
+    </style>
+{% endblock %}

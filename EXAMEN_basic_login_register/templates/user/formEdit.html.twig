@@ -1,0 +1,101 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+
+    <style>
+    /* Contenedor principal para el formulario de edición */
+    .edit-roles-container {
+        background: #f9f9f9;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 450px;
+        text-align: center;
+    }
+
+    /* Estilo para el título */
+    .edit-roles-container h1 {
+        margin-bottom: 30px;
+        font-size: 26px;
+        color: #333;
+    }
+
+    /* Contenedor para las opciones de rol */
+    .role-options {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Estilo para las etiquetas de los roles */
+    .role-label {
+        display: block;
+        font-size: 18px;
+        color: #444;
+        margin-bottom: 10px;
+    }
+
+    /* Estilo para los inputs de tipo radio */
+    .role-input {
+        margin-right: 15px;
+        margin-bottom: 20px;
+        transform: scale(1.2); /* Agranda los botones de opción */
+        cursor: pointer;
+    }
+
+    /* Botón de actualización */
+    .update-btn {
+        width: 90%;
+        padding: 12px;
+        background: #28a745;
+        border: none;
+        color: white;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    /* Hover del botón */
+    .update-btn:hover {
+        background: #218838;
+    }
+
+    /* Estilo para el enlace de volver a la lista */
+    .back-link {
+        margin-top: 20px;
+        display: inline-block;
+        font-size: 16px;
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+        color: #0056b3;
+    }
+    </style>
+
+    <h1>Editar Rol: {{user.id}}: {{user.username}}</h1>
+
+    <div class="edit-roles-container">
+        <form method="POST" action="{{ path('app_user_edit', {'id': user.id}) }}">
+            <div class="role-options">
+                <label for="roles_admin" class="role-label">Administrador</label>
+                <input type="radio" id="roles_admin" name="roles" value="ROLE_ADMIN" {% if 'ROLE_ADMIN' in user.roles %}checked{% endif %} class="role-input">
+
+                <label for="roles_client" class="role-label">Cliente</label>
+                <input type="radio" id="roles_client" name="roles" value="ROLE_CLIENT" {% if 'ROLE_CLIENT' in user.roles %}checked{% endif %} class="role-input">
+
+                <label for="roles_employee" class="role-label">Trabajador</label>
+                <input type="radio" id="roles_employee" name="roles" value="ROLE_EMPLOYEE" {% if 'ROLE_EMPLOYEE' in user.roles %}checked{% endif %} class="role-input">
+            </div>
+
+            <button type="submit" class="update-btn">Actualizar</button>
+        </form>
+
+        <a href="{{ path('app_user_index') }}" class="back-link">Volver a la lista</a>
+    </div>
+{% endblock %}

@@ -111,28 +111,11 @@
 
 
             <div class="nav-bar">
-            
-            {% if is_granted('ROLE_ADMIN') %}
                 <nav>
-                    <a href="{{ path('app_main') }}">Tickets</a>
-                    <a href="{{ path('app_user_index') }}">Usuarios</a>
+                    <a href="#seccion1">Sección 1</a>
+                    <a href="#seccion2">Sección 2</a>
+                    <a href="#seccion3">Sección 3</a>
                 </nav>
-            {% endif %}
-
-            {% if is_granted('ROLE_CLIENT') and not is_granted('ROLE_ADMIN') and not is_granted('ROLE_EMPLOYEE') %}
-                <nav>
-                    <a href="{{ path('app_main') }}">Tickets</a>
-                    <a href="{{ path('app_ticket_new') }}">Crear Ticket</a>
-
-                </nav>
-            {% endif %}
-
-            {% if is_granted('ROLE_EMPLOYEE') %}
-                <nav>
-                    <a href="{{ path('app_main') }}">Tickets</a>
-                </nav>
-            {% endif %}
-
                 {% if app.user %}
                     <div class="nav-profile">
                     <a href="">🆔{{ app.user.userIdentifier }}</a>
